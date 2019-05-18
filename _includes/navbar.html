@@ -1,0 +1,24 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ '/' | absolute_url }}">{{ site.title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!-- Render a button for each collection -->
+      {% for collection in site.collections %}
+        {% if collection.output %}
+        {% assign category = collection.label %}
+        {% assign url = category + "/index.md" | absolute_url %}
+          {% if category != "posts" %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url }}">{{ category | capitalize }}</a>
+            </li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% if jekyll.environment=="development" %}
+    <span class="badge badge-danger my-2 my-lg-0 mr-4">DM Mode</span>
+    {% endif %}
+  </nav>
